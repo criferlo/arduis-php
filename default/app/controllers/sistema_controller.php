@@ -11,7 +11,7 @@ class SistemaController extends AppController{
                     Router::redirect("sesion/index");
                 }
                                
-		Flash::info("DISEÑO DE UN EQUIPO PARA DIAGNÓSTICO, TRATAMIENTO Y MONITOREO AUTOMATIZADO DE ARTROSIS, A PARTOR DEL ANÁLISIS ELECTROMIOGRÁFICO Y DE IMÁGENES RADIOLÓGICAS CON APLICACIÓN PARA SMARTPHONE COMO INTERFAZ DE USUARIO INALÁMBRICA");
+		Flash::info("ARDUIS-PHP Internacionalizacion");
 	}
 
 }
