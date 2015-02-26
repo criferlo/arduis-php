@@ -1,0 +1,36 @@
+<?echo View::content()?>
+<?echo Form::openMultipart("persona/nuevo", "role='form'")?>
+
+<div class="form-group">
+    <label>Identificación</label>
+    <?echo Form::text("identificacion","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Tipo identificación</label>
+    <?echo Form::dbSelect("tipoidentificacion_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Tipo persona</label>
+    <?echo Form::dbSelect("tipopersona_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+
+<div class="form-group">
+    <label>Nombre completo</label>
+    <?echo Form::text("nombrecompleto","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Tipo programa</label>
+    <?echo Form::dbSelect("tipoprograma_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Evidencia (foto o escaneo de cedula)</label>
+    <?echo Form::file("archivo")?>
+</div>
+<div class="form-group">
+    <?echo Form::submit("Guardar","class='btn btn-danger btn-sm'")?>
+    <?echo Html::link("persona/index","Cancelar")?>
+</div>
+
+<?echo Form::close()?>
+
+<?echo View::content()?>
