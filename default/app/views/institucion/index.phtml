@@ -1,0 +1,108 @@
+
+<? echo View::content() ?>
+<? echo Form::open("","POST","class='form-inline'") ?>
+
+<div class='row'>
+
+    <label>Buscar por</label>
+
+    <? $arr = array("Nombre") ?>
+    <? echo Form::Select("comboBusqueda", $arr, "class=''", "Nombre") ?>
+
+    <? echo Form::text("busqueda", "placeholder='Escribe aquí..'", "") ?>
+
+
+    <button type="submit" class="btn btn-purple btn-sm">
+        <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+        Buscar
+    </button>
+    <? echo Html::link("institucion/nuevo", "Crear nuevo", "class='btn btn-danger btn-sm'") ?>
+
+</div>
+
+
+<? echo Form::close(); ?>
+<br>
+<? View::partial('paginators/extended', false, array('page' => $arrInstitucion,'url' => 'institucion/index')); ?>
+<br>
+<table class='table table-striped'>
+    <thead>
+    <th>Id</th>
+    <th>Nombre</th>
+    <th>Ciudad</th>    
+    <th>Opciones</th>    
+</thead>
+
+<? foreach ($arrInstitucion->items as $obj) { ?>
+
+    <tr>
+        <td><? echo $obj->id ?></td>
+        <td><? echo $obj->nombre ?></td>
+        
+        <td>
+            <?
+            $tp = new Tipociudad();
+            $tp->find_first($obj->tipociudad_id);
+            echo $tp->nombre;
+            ?>
+        </td>
+        <td>
+            <div class="hidden-sm hidden-xs btn-group">
+                <!--<button class="btn btn-xs btn-success">
+                   
+                    <i class="ace-icon fa fa-check bigger-120"></i>
+                    
+               </button>-->
+
+                <div class="btn btn-xs btn-info">
+                   
+                     <?echo Html::linkSoloIcono("ace-icon fa fa-pencil bigger-120","",false, "institucion/editar/$obj->id")?>
+                </div>
+
+                <div class="btn btn-xs btn-danger">
+                    
+                     <?echo Js::linkAction("eliminar/$obj->id","","¿Está seguro de eliminar?","ace-icon fa fa-trash-o bigger-120")?>
+                </div>
+
+                <!--<button class="btn btn-xs btn-warning">
+                    <i class="ace-icon fa fa-flag bigger-120"></i>
+                </button>-->
+            </div>
+
+            <div class="hidden-md hidden-lg">
+                <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                        <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                        <li>
+                            <?echo "hola"?>
+                            
+                        </li>
+
+                        <li>
+                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                <span class="green">
+                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                <span class="red">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+<? } ?>
+</table>
+
+<? View::partial('paginators/extended', false, array('page' => $arrInstitucion,'url' => 'institucion/index')); ?>

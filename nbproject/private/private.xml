@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/views/persona/index.phtml</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/core/views/partials/paginators/extended.phtml</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/core/views/partials/paginators/classic.phtml</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/core/views/partials/paginators/digg.phtml</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/core/views/partials/paginators/mio.phtml</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/models/Persona.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/models/Tiposemestre.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/views/movilidad/index.phtml</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/models/Movilidad.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/views/movilidad/nuevo.phtml</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/controllers/movilidad_controller.php</file>
             <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/views/persona/nuevo.phtml</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/views/persona/editar.phtml</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/core/views/partials/paginators/punbb.phtml</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/arduis-php/default/app/controllers/persona_controller.php</file>
         </group>
     </open-files>
 </project-private>
