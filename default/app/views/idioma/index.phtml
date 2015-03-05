@@ -1,84 +1,70 @@
 
 <? echo View::content() ?>
-<? echo Form::open("", "POST", "class='form-inline'") ?>
+<? echo Form::open("","POST","class='form-inline'") ?>
 
 <div class='row'>
 
     <label>Buscar por</label>
 
-    <? $arr = array("Semestre") ?>
-    <? echo Form::Select("comboBusqueda", $arr, "class=''", "Semestre") ?>
+    <? $arr = array("Nivel") ?>
+    <? echo Form::Select("comboBusqueda", $arr, "class=''", "Nivel") ?>
 
-   <?echo Form::dbSelect("tiposemestre_id",null,null,"Seleccione..","class='form-control'")?>
-
+      <?echo Form::dbSelect("tiponivelingles_id",null,null,"Seleccione..","class='form-control'")?>
+    
+  
     <button type="submit" class="btn btn-purple btn-sm">
         <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
         Buscar
     </button>
-    <? echo Html::link("movilidad/nuevo", "Crear nuevo", "class='btn btn-danger btn-sm'") ?>
+    <? echo Html::link("idioma/nuevo", "Crear nuevo", "class='btn btn-danger btn-sm'") ?>
 
 </div>
 
 
 <? echo Form::close(); ?>
 <br>
-<? View::partial('paginators/extended', false, array('page' => $arrMovilidad, 'url' => 'movilidad/index')); ?>
+<? View::partial('paginators/extended', false, array('page' => $arrIdioma,'url' => 'idioma/index')); ?>
 <br>
 <table class='table table-striped'>
     <thead>
-    <th>Nombres</th>
-    <th>Ciudad</th>
-    <th>País</th>    
-    <th>Fecha</th>
-    <th>Semestre</th>
-    <th>Tipo movilidad</th>  
+    <th>Id</th>
+    <th>Persona</th>
+    <th>Nivel de inglés</th>
+    <th>Institución</th>
+    <th>Fecha inicio</th>
+    <th>Fecha fin</th>
     <th>Opciones</th>
 </thead>
 
-<? foreach ($arrMovilidad->items as $obj) { ?>
+<? foreach ($arrIdioma->items as $obj) { ?>
 
     <tr>
-        <td><?
-            $per = new Persona();
-            $per->find_first($obj->persona_id);
-            echo $per->nombrecompleto;
-            ?></td>
+        <td><? echo $obj->id ?></td>
+        <td><? 
+                $per = new Persona();
+                $per->find_first($obj->persona_id);
+                echo $per->nombrecompleto 
+            ?>
+       </td>
         <td><? 
         
-            $ins = new Tipoinstitucion();
-            $ins->find_first($obj->tipoinstitucion_id);
-        
-            $ciu = new Tipociudad();
-            $ciu->find_first($ins->tipociudad_id);
-            
-            echo $ciu->nombre;
-                                
-                    ?></td>
-
+                $tip = new Tiponivelingles();
+                $tip->find_first($obj->tiponivelingles_id);
+                echo $tip->nombre;
+            ?>
+        </td>
         <td>
             <?
-            $tp = new Tipopais();
-            $tp->find_first($ciu->tiipopais_id);
+            $tp = new Tipoinstitucion();
+            $tp->find_first($obj->tipoinstitucion_id);
             echo $tp->nombre;
             ?>
         </td>
         <td>
-            <?echo $obj->fechamovilidad?>
+           <?echo $obj->fechainicio?>
         </td>
-        <td>
-            <?
-                $ts = new Tiposemestre();
-                $ts->find_first($obj->tiposemestre_id);
-                echo $ts->nombre;
-            ?>
-        </td>
-        <td>
-            <?
-                $tm = new Tipomovilidad();
-                $tm->find_first($obj->tipomovilidad_id);
-                echo $tm->nombre;
-            
-            ?>
+          <td>
+           <?echo $obj->fechafin?>
         </td>
         <td>
             <div class="hidden-sm hidden-xs btn-group">
@@ -89,13 +75,13 @@
                </button>-->
 
                 <div class="btn btn-xs btn-info">
-
-                    <? echo Html::linkSoloIcono("ace-icon fa fa-pencil bigger-120", "", false, "movilidad/editar/$obj->id") ?>
+                   
+                     <?echo Html::linkSoloIcono("ace-icon fa fa-pencil bigger-120","",false, "idioma/editar/$obj->id")?>
                 </div>
 
                 <div class="btn btn-xs btn-danger">
-
-                    <? echo Js::linkAction("eliminar/$obj->id", "", "¿Está seguro de eliminar?", "ace-icon fa fa-trash-o bigger-120") ?>
+                    
+                     <?echo Js::linkAction("eliminar/$obj->id","","¿Está seguro de eliminar?","ace-icon fa fa-trash-o bigger-120")?>
                 </div>
 
                 <!--<button class="btn btn-xs btn-warning">
@@ -111,8 +97,8 @@
 
                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                         <li>
-                            <? echo "hola" ?>
-
+                            <?echo "hola"?>
+                            
                         </li>
 
                         <li>
@@ -139,4 +125,4 @@
 <? } ?>
 </table>
 
-<? View::partial('paginators/extended', false, array('page' => $arrMovilidad, 'url' => 'movilidad/index')); ?>
+<? View::partial('paginators/extended', false, array('page' => $arrIdioma,'url' => 'idioma/index')); ?>

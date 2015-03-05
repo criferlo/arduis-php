@@ -1,0 +1,41 @@
+<?echo View::content()?>
+<?echo Form::openMultipart("idioma/nuevo", "role='form'")?>
+
+<div class="form-group">
+    <label>Persona</label>
+    <?echo Form::dbSelect("persona_id","nombrecompleto",null,"Seleccione..","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Nivel de inglés</label>
+    <?echo Form::dbSelect("tiponivelingles_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Profesor</label>
+    <?echo Form::text("profesor","class='form-control'")?>
+</div>
+
+<div class="form-group">
+    <label>Fecha inicio</label>
+    <?echo Form::date("fechainicio","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Fecha fin</label>
+    <?echo Form::date("fechafin","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Institución</label>
+    <?echo Form::dbSelect("tipoinstitucion_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+
+<div class="form-group">
+    <label>Evidencia (foto o escaneo de cedula)</label>
+    <?echo Form::file("archivo")?>
+</div>
+<div class="form-group">
+    <?echo Form::submit("Guardar","class='btn btn-danger btn-sm'")?>
+    <?echo Html::link("idioma/index","Cancelar")?>
+</div>
+
+<?echo Form::close()?>
+
+<?echo View::content()?>

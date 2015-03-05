@@ -1,0 +1,41 @@
+<?echo View::content()?>
+<?echo Form::openMultipart("investigacion/nuevo", "role='form'")?>
+
+<div class="form-group">
+    <label>Título</label>
+    <?echo Form::text("titulo","class='form-control'")?>
+</div>
+
+<div class="form-group">
+    <label>Semestre</label>
+    <?echo Form::dbSelect("tiposemestre_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Fecha inicio</label>
+    <?echo Form::date("fechainicio", "class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Fecha fin</label>
+    <?echo Form::date("fechafin", "class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Estado de investigación</label>
+    <?echo Form::dbSelect("tipoestadoinvestigacion_id","nombre",null,"Seleccione..","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Fecha fin esperada</label>
+    <?echo Form::date("fechafinesperada", "class='form-control'")?>
+</div>
+
+<div class="form-group">
+    <label>Evidencia (foto o escaneo de cedula)</label>
+    <?echo Form::file("archivo")?>
+</div>
+<div class="form-group">
+    <?echo Form::submit("Guardar","class='btn btn-danger btn-sm'")?>
+    <?echo Html::link("investigacion/index","Cancelar")?>
+</div>
+
+<?echo Form::close()?>
+
+<?echo View::content()?>

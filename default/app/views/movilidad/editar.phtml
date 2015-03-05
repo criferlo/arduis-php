@@ -1,0 +1,53 @@
+<?echo View::content()?>
+<?echo Form::openMultipart("movilidad/editar/$id", "role='form'")?>
+
+<div class="form-group">
+    <label>Semestre</label>
+    <?echo Form::dbSelect("tiposemestre_id",null,null,"Seleccione..","class='form-control'",$per->tiposemestre_id)?>
+</div>
+<div class="form-group">
+    <label>Fecha</label>
+    <?echo Form::date("fechamovilidad", "class='form-control'",$per->fechamovilidad)?>
+</div>
+<div class="form-group">
+    <label>Persona</label>
+    <?echo Form::dbSelect("persona_id","nombrecompleto",null,"Seleccione..","class='form-control'",$per->persona_id)?>
+</div>
+
+<div class="form-group">
+    <label>Area de conocimiento</label>
+    <?echo Form::text("areaconocimiento","class='form-control'",$per->areaconocimiento)?>
+</div>
+<div class="form-group">
+    <label>Evento</label>
+    <?echo Form::text("evento","class='form-control'",$per->nombreevento)?>
+</div>
+<div class="form-group">
+    <label>Institución</label>
+    <?echo Form::dbSelect("tipoinstitucion_id",null,null,"Seleccione..","class='form-control'",$per->tipoinstitucion_id)?>
+</div>
+<div class="form-group">
+    <label>Tipo de movilidad</label>
+    <?echo Form::dbSelect("tipomovilidad_id",null,null,"Seleccione..","class='form-control'",$per->tipomovilidad_id)?>
+</div>
+<div class="form-group">
+    <label>Financiación</label>
+    <?echo Form::dbSelect("tipofinanciacion_id",null,null,"Seleccione..","class='form-control'",$per->tipofinanciacion_id)?>
+</div>
+<div class="form-group">
+    <label>Describa la experiencia</label>
+    <?echo Form::textarea("descripcionexperiencia","class='form-control'",$per->descripcionexperiencia)?>
+</div>
+
+<div class="form-group">
+    <label>Evidencia (foto o escaneo de cedula)</label>
+    <?echo Form::file("archivo")?>
+</div>
+<div class="form-group">
+    <?echo Form::submit("Guardar","class='btn btn-danger btn-sm'")?>
+    <?echo Html::link("movilidad/index","Cancelar")?>
+</div>
+
+<?echo Form::close()?>
+
+<?echo View::content()?>

@@ -1,85 +1,49 @@
 
 <? echo View::content() ?>
-<? echo Form::open("", "POST", "class='form-inline'") ?>
-
+<?echo Form::open("personavinculada/index/$idinvestigacion")?>
 <div class='row'>
 
-    <label>Buscar por</label>
+    <label>Agregar</label>
 
-    <? $arr = array("Semestre") ?>
-    <? echo Form::Select("comboBusqueda", $arr, "class=''", "Semestre") ?>
-
-   <?echo Form::dbSelect("tiposemestre_id",null,null,"Seleccione..","class='form-control'")?>
+    
+   <?echo Form::dbSelect("persona_id","nombrecompleto",null,"Seleccione..","class='form-control'")?>
 
     <button type="submit" class="btn btn-purple btn-sm">
         <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-        Buscar
+        Agregar
     </button>
-    <? echo Html::link("movilidad/nuevo", "Crear nuevo", "class='btn btn-danger btn-sm'") ?>
+    
 
 </div>
+<?echo Form::close()?>
 
 
-<? echo Form::close(); ?>
-<br>
-<? View::partial('paginators/extended', false, array('page' => $arrMovilidad, 'url' => 'movilidad/index')); ?>
 <br>
 <table class='table table-striped'>
     <thead>
+    <th>Identificación</th>
     <th>Nombres</th>
-    <th>Ciudad</th>
-    <th>País</th>    
-    <th>Fecha</th>
-    <th>Semestre</th>
-    <th>Tipo movilidad</th>  
+    <th>Programa</th>
     <th>Opciones</th>
 </thead>
 
-<? foreach ($arrMovilidad->items as $obj) { ?>
-
+<? foreach ($arrPersonas as $obj) { ?>
+    <?
+        $per = new Persona();
+        $per->find_first($obj->persona_id)
+    ?>
     <tr>
-        <td><?
-            $per = new Persona();
-            $per->find_first($obj->persona_id);
-            echo $per->nombrecompleto;
-            ?></td>
-        <td><? 
-        
-            $ins = new Tipoinstitucion();
-            $ins->find_first($obj->tipoinstitucion_id);
-        
-            $ciu = new Tipociudad();
-            $ciu->find_first($ins->tipociudad_id);
-            
-            echo $ciu->nombre;
-                                
-                    ?></td>
+        <td><?echo $per->identificacion?></td>
+        <td><?echo $per->nombrecompleto?></td>
 
         <td>
             <?
-            $tp = new Tipopais();
-            $tp->find_first($ciu->tiipopais_id);
+            $tp = new Tipoprograma();
+            $tp->find_first($per->tipoprograma_id);
             echo $tp->nombre;
             ?>
         </td>
-        <td>
-            <?echo $obj->fechamovilidad?>
-        </td>
-        <td>
-            <?
-                $ts = new Tiposemestre();
-                $ts->find_first($obj->tiposemestre_id);
-                echo $ts->nombre;
-            ?>
-        </td>
-        <td>
-            <?
-                $tm = new Tipomovilidad();
-                $tm->find_first($obj->tipomovilidad_id);
-                echo $tm->nombre;
-            
-            ?>
-        </td>
+      
         <td>
             <div class="hidden-sm hidden-xs btn-group">
                 <!--<button class="btn btn-xs btn-success">
@@ -88,14 +52,9 @@
                     
                </button>-->
 
-                <div class="btn btn-xs btn-info">
-
-                    <? echo Html::linkSoloIcono("ace-icon fa fa-pencil bigger-120", "", false, "movilidad/editar/$obj->id") ?>
-                </div>
-
                 <div class="btn btn-xs btn-danger">
 
-                    <? echo Js::linkAction("eliminar/$obj->id", "", "¿Está seguro de eliminar?", "ace-icon fa fa-trash-o bigger-120") ?>
+                    <? echo Js::linkAction("eliminar/$idinvestigacion/$obj->id", "", "¿Está seguro de eliminar?", "ace-icon fa fa-trash-o bigger-120") ?>
                 </div>
 
                 <!--<button class="btn btn-xs btn-warning">
@@ -139,4 +98,3 @@
 <? } ?>
 </table>
 
-<? View::partial('paginators/extended', false, array('page' => $arrMovilidad, 'url' => 'movilidad/index')); ?>
