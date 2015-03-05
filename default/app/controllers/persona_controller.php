@@ -112,4 +112,5 @@ class PersonaController extends AppController {
             Router::redirect("persona/index");
         }
     }
+    
 }

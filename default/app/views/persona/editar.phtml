@@ -23,6 +23,16 @@
     <?echo Form::dbSelect("tipoprograma_id",null,null,"Seleccione..","class='form-control'","$per->tipoprograma_id")?>
 </div>
 <div class="form-group">
+    
+     <?
+        if($per->archivo_id!=null){
+            $arc = new Archivo();
+            $arc->find_first($per->archivo_id);
+            echo "<a target='blank' href='".PUBLIC_PATH."/files/upload/".$arc->nombre."'>Descargar archivo actual</a>";
+        }
+     ?>
+</div>    
+<div class="form-group">
     <label>Evidencia (foto o escaneo de cedula)</label>
     <?echo Form::file("archivo")?>
 </div>
