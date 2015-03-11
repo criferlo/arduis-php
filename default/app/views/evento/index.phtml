@@ -1,62 +1,62 @@
 
 <? echo View::content() ?>
-<? echo Form::open("", "POST", "class='form-inline'") ?>
+<? echo Form::open("","POST","class='form-inline'") ?>
 
 <div class='row'>
 
     <label>Buscar por</label>
 
-    <? $arr = array("Titulo") ?>
-    <? echo Form::Select("comboBusqueda", $arr, "class=''", "Titulo") ?>
+    <? $arr = array("Nombre") ?>
+    <? echo Form::Select("comboBusqueda", $arr, "class=''", "Nombre") ?>
 
-   <? echo Form::text("busqueda", "placeholder='Escribe aquí..'", "") ?>
+    <? echo Form::text("busqueda", "placeholder='Escribe aquí..'", "") ?>
+
 
     <button type="submit" class="btn btn-purple btn-sm">
         <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
         Buscar
     </button>
-    <? echo Html::link("investigacion/nuevo", "Crear nuevo", "class='btn btn-danger btn-sm'") ?>
+    <? echo Html::link("evento/nuevo", "Crear nuevo", "class='btn btn-danger btn-sm'") ?>
 
 </div>
 
 
 <? echo Form::close(); ?>
 <br>
-<? View::partial('paginators/extended', false, array('page' => $arrInvestigacion, 'url' => 'investigacion/index')); ?>
+<? View::partial('paginators/extended', false, array('page' => $arrEventos,'url' => 'evento/index')); ?>
 <br>
 <table class='table table-striped'>
     <thead>
-    <th>Título</th>
-    <th>Estado</th>
-    <th>Fecha inicio</th>    
-    <th>Fecha fin</th>
-    <th>Semestre</th>     
+    <th>Id</th>
+    <th>Semestre</th>
+    <th>Fecha</th>
+    <th>Nombre evento</th>
+    <th>Tipo evento</th>
     <th>Opciones</th>
 </thead>
 
-<? foreach ($arrInvestigacion->items as $obj) { ?>
+<? foreach ($arrEventos->items as $obj) { ?>
 
     <tr>
-        <td>
-            <?echo $obj->titulo?>
+        <td><? echo $obj->id ?></td>
+        <td><? 
+            $ts = new Tiposemestre();
+            $ts->find_first($obj->tiposemestre_id);
+            echo $ts->nombre ?>
+        
         </td>
-        <td><?
-            $per = new Tipoestadoinvestigacion();
-            $per->find_first($obj->tipoestadoinvestigacion_id);
-            echo $per->nombre;
-            ?>
-        </td>
-        <td><?echo $obj->fechainicio;?></td>
-         <td><?echo $obj->fechafin;?></td>
-            
+        <td><? echo $obj->fecha ?></td>
         <td>
             <?
-                $ts = new Tiposemestre();
-                $ts->find_first($obj->tiposemestre_id);
-                echo $ts->nombre;
+            echo $obj->nombreevento;
             ?>
         </td>
-       
+          <td><? 
+            $te = new Tipoevento();
+            $te->find_first($obj->tipoevento_id);
+            echo $te->nombre ?>
+        
+        </td>
         <td>
             <div class="hidden-sm hidden-xs btn-group">
                 <!--<button class="btn btn-xs btn-success">
@@ -66,25 +66,18 @@
                </button>-->
 
                 <div class="btn btn-xs btn-info">
-
-                    <? echo Html::linkSoloIcono("ace-icon fa fa-pencil bigger-120", "", false, "investigacion/editar/$obj->id") ?>
+                   
+                     <?echo Html::linkSoloIcono("ace-icon fa fa-pencil bigger-120","",false, "evento/editar/$obj->id")?>
                 </div>
 
                 <div class="btn btn-xs btn-danger">
-
-                    <? echo Js::linkAction("eliminar/$obj->id", "", "¿Está seguro de eliminar?", "ace-icon fa fa-trash-o bigger-120") ?>
+                    
+                     <?echo Js::linkAction("eliminar/$obj->id","","¿Está seguro de eliminar?","ace-icon fa fa-trash-o bigger-120")?>
                 </div>
-                
-                <div class="btn btn-xs btn-group">
+                 <div class="btn btn-xs btn-group">
 
-                    <? echo Html::linkSoloIcono("ace-icon fa fa-users bigger-120", "", false, "personavinculada/index/$obj->id") ?>
-                </div>
-                
-                 <div class="btn btn-xs btn-purple">
-
-                    <? echo Html::linkSoloIcono("ace-icon fa fa-cogs bigger-120", "", false, "institucionvinculada/index/$obj->id") ?>
-                </div>
-
+                    <? echo Html::linkSoloIcono("ace-icon fa fa-users bigger-120", "", false, "personaevento/index/$obj->id") ?>
+                </div>    
                 <!--<button class="btn btn-xs btn-warning">
                     <i class="ace-icon fa fa-flag bigger-120"></i>
                 </button>-->
@@ -98,8 +91,8 @@
 
                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                         <li>
-                            <? echo "hola" ?>
-
+                            <?echo "hola"?>
+                            
                         </li>
 
                         <li>
@@ -126,4 +119,4 @@
 <? } ?>
 </table>
 
-<? View::partial('paginators/extended', false, array('page' => $arrInvestigacion, 'url' => 'investigacion/index')); ?>
+<? View::partial('paginators/extended', false, array('page' => $arrEventos,'url' => 'evento/index')); ?>

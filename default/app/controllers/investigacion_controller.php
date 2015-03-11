@@ -12,7 +12,7 @@
  * @author cristhian
  */
 View::template("template_sistema");
-Load::models("Investigacion","Tipoestadoinvestigacion","Archivo","Tiposemestre");
+Load::models("Investigacion","Tipoestadoinvestigacion","Archivo","Tiposemestre","Usuario");
 class InvestigacionController extends AppController {
     
     function index($page = 1) {
@@ -42,6 +42,11 @@ class InvestigacionController extends AppController {
             $per->tipoestadoinvestigacion_id = Input::post("tipoestadoinvestigacion_id");
             $per->tiposemestre_id = Input::post("tiposemestre_id");
             $per->titulo= Input::post("titulo");
+            $per->registradopor = Auth::get("nombre");
+            
+            $usu = new Usuario();
+            $usu->find_first(Auth::get("id"));
+            $per->programaqueregistra_id = $usu->tipoprograma_id;
 
             $archivo = Upload::factory("archivo");
             if ($archivo->isUploaded()) {

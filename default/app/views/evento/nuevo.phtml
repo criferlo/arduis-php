@@ -1,0 +1,42 @@
+<?echo View::content()?>
+<?echo Form::openMultipart("evento/nuevo", "role='form'")?>
+
+
+<div class="form-group">
+    <label>Semestre</label>
+    <?echo Form::dbSelect("tiposemestre_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Fecha</label>
+    <?echo Form::date("fecha", "class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Nombre evento</label>
+    <?echo Form::text("nombreevento","class='form-control'")?>
+</div>
+
+<div class="form-group">
+    <label>Tipo evento</label>
+    <?echo Form::dbSelect("tipoevento_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Institución invitada</label>
+    <?echo Form::dbSelect("tipoinstitucion_id",null,null,"Seleccione..","class='form-control'")?>
+</div>
+
+<div class="form-group">
+    <label>Describa la experiencia</label>
+    <?echo Form::textarea("descripcion","class='form-control'")?>
+</div>
+<div class="form-group">
+    <label>Evidencia (foto o escaneo de cedula)</label>
+    <?echo Form::file("archivo")?>
+</div>
+<div class="form-group">
+    <?echo Form::submit("Guardar","class='btn btn-danger btn-sm'")?>
+    <?echo Html::link("evento/index","Cancelar")?>
+</div>
+
+<?echo Form::close()?>
+
+<?echo View::content()?>

@@ -7,49 +7,50 @@
  */
 
 /**
- * Description of ingles_controller
+ * Description of evento_controller
  *
  * @author cristhian
  */
 View::template("template_sistema");
-Load::models("Idioma","Archivo","Persona","Tiponivelingles","Tipoinstitucion","Usuario");
-class IdiomaController extends AppController {
+Load::models("Eventointernacional","Archivo","Tipoevento","Tiposemestre","Usuario");
+class EventoController extends AppController {
     //put your code here
-    
     function index($page=1){
-        $per = new Idioma();
+        
+        $per = new Eventointernacional();
         //$this->arrPersona = array();
         $consulta=null;
         
         if(!empty(Input::post("busqueda"))){
           
                 if(Input::post("comboBusqueda")=="0"){
-                    $consulta="tiponivelingles_id=".Input::post("busqueda");
+                    $consulta="nombreevento like '%".Input::post("busqueda")."%'";
                 }
-                
-            
         }
                 
-        $this->arrIdioma =  $per->paginar($consulta,$page);
+        $this->arrEventos =  $per->paginar($consulta,$page);
+        
     }
     
     function nuevo(){
-        if(Input::hasPost("persona_id")){
+        if(Input::hasPost("tiposemestre_id")){
             
             
-            $per = new Idioma();
-            $per->persona_id=Input::post("persona_id");
-            $per->profesor=Input::post("profesor");
+            $per = new Eventointernacional();
             $per->tipoinstitucion_id=Input::post("tipoinstitucion_id");
-            $per->tiponivelingles_id=Input::post("tiponivelingles_id");
-            $per->fechainicio=Input::post("fechainicio");
-            $per->fechafin=Input::post("fechafin");
+            $per->tiposemestre_id=Input::post("tiposemestre_id");
+            $per->fecha=Input::post("fecha");
+            $per->nombreevento=Input::post("nombreevento");
+            $per->tipoevento_id=Input::post("tipoevento_id");
+            $per->descripcion=Input::post("descripcion");
+            
             $per->registradopor = Auth::get("nombre");
             
             $usu = new Usuario();
             $usu->find_first(Auth::get("id"));
             $per->programaqueregistra_id = $usu->tipoprograma_id;
-                        
+
+            
             $archivo =  Upload::factory("archivo");
             if($archivo->isUploaded()){
                 
@@ -62,29 +63,30 @@ class IdiomaController extends AppController {
             
             
             if($per->save()){
-                 Flash::valid("Se grabó el registro de idioma correctamente");
-                 Router::redirect("idioma/index");
+                 Flash::valid("Se grabó el evento correctamente");
+                 Router::redirect("evento/index");
             }
            
         }
     }
     
     function editar($id){
-        $this->per = new Idioma();
+        
+        $this->per = new Eventointernacional();
         $this->per->find_first($id);
         $this->id=$id;
         
-        if(Input::hasPost("persona_id")){
+        if(Input::hasPost("tiposemestre_id")){
             
             
-            $per = new Idioma();
+            $per = new Eventointernacional();
             $per->find_first($id);
-            $per->persona_id=Input::post("persona_id");
-            $per->profesor=Input::post("profesor");
             $per->tipoinstitucion_id=Input::post("tipoinstitucion_id");
-            $per->tiponivelingles_id=Input::post("tiponivelingles_id");
-            $per->fechainicio=Input::post("fechainicio");
-            $per->fechafin=Input::post("fechafin");
+            $per->tiposemestre_id=Input::post("tiposemestre_id");
+            $per->fecha=Input::post("fecha");
+            $per->nombreevento=Input::post("nombreevento");
+            $per->tipoevento_id=Input::post("tipoevento_id");
+            $per->descripcion=Input::post("descripcion");
             
             $archivo =  Upload::factory("archivo");
             if($archivo->isUploaded()){
@@ -95,22 +97,20 @@ class IdiomaController extends AppController {
                 $per->archivo_id = $arc->id;
             }
             
-            
-            
             if($per->update()){
-                 Flash::valid("Se actualizó el registro idioma correctamente");
-                 Router::redirect("idioma/index");
+                 Flash::valid("Se actualizó el evento correctamente");
+                 Router::redirect("evento/index");
             }
            
         }
     }
     
     function eliminar($id){
-        $per = new Idioma();
+        $per = new Eventointernacional();
         
         if($per->delete($id)){
             Flash::valid("Se eliminó correctamente");
-            Router::redirect("idioma/index");
+            Router::redirect("evento/index");
         }
     }
 }

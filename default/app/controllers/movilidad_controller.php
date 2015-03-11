@@ -13,7 +13,7 @@
  */
 //formularios para docentes de la universidad movilizados hacia 
 
-Load::models("Movilidad", "Persona", "Tipociudad", "Tipopais", "Tipomovilidad", "Archivo", "Tipoinstitucion");
+Load::models("Movilidad", "Persona", "Tipociudad", "Tipopais", "Tipomovilidad", "Archivo", "Tipoinstitucion","Usuario");
 View::template("template_sistema");
 
 class MovilidadController extends AppController {
@@ -51,6 +51,11 @@ class MovilidadController extends AppController {
             $per->tipofinanciacion_id = Input::post("tipofinanciacion_id");
             $per->descripcionexperiencia = Input::post("descripcionexperiencia");
             $per->descripcionexperiencia = Input::post("descripcionexperiencia");
+            $per->registradopor = Auth::get("nombre");
+            
+            $usu = new Usuario();
+            $usu->find_first(Auth::get("id"));
+            $per->programaqueregistra_id = $usu->tipoprograma_id;
 
             $archivo = Upload::factory("archivo");
             if ($archivo->isUploaded()) {

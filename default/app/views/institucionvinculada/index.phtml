@@ -1,62 +1,40 @@
 
 <? echo View::content() ?>
-<? echo Form::open("", "POST", "class='form-inline'") ?>
-
+<?echo Form::open("institucionvinculada/index/$idinvestigacion")?>
 <div class='row'>
 
-    <label>Buscar por</label>
+    <label>Agregar</label>
 
-    <? $arr = array("Titulo") ?>
-    <? echo Form::Select("comboBusqueda", $arr, "class=''", "Titulo") ?>
-
-   <? echo Form::text("busqueda", "placeholder='Escribe aquí..'", "") ?>
+    
+   <?echo Form::dbSelect("tipoinstitucion_id","nombre",null,"Seleccione..","class='form-control'")?>
 
     <button type="submit" class="btn btn-purple btn-sm">
         <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-        Buscar
+        Agregar
     </button>
-    <? echo Html::link("investigacion/nuevo", "Crear nuevo", "class='btn btn-danger btn-sm'") ?>
+    
 
 </div>
+<?echo Form::close()?>
 
 
-<? echo Form::close(); ?>
-<br>
-<? View::partial('paginators/extended', false, array('page' => $arrInvestigacion, 'url' => 'investigacion/index')); ?>
 <br>
 <table class='table table-striped'>
     <thead>
-    <th>Título</th>
-    <th>Estado</th>
-    <th>Fecha inicio</th>    
-    <th>Fecha fin</th>
-    <th>Semestre</th>     
+    <th>Institución vinculada</th>
     <th>Opciones</th>
 </thead>
 
-<? foreach ($arrInvestigacion->items as $obj) { ?>
-
+<? foreach ($arrInstituciones as $obj) { ?>
+    <?
+        $per = new Tipoinstitucion();
+        $per->find_first($obj->tipoinstitucion_id)
+                
+    ?>
     <tr>
-        <td>
-            <?echo $obj->titulo?>
-        </td>
-        <td><?
-            $per = new Tipoestadoinvestigacion();
-            $per->find_first($obj->tipoestadoinvestigacion_id);
-            echo $per->nombre;
-            ?>
-        </td>
-        <td><?echo $obj->fechainicio;?></td>
-         <td><?echo $obj->fechafin;?></td>
-            
-        <td>
-            <?
-                $ts = new Tiposemestre();
-                $ts->find_first($obj->tiposemestre_id);
-                echo $ts->nombre;
-            ?>
-        </td>
+        <td><?echo $per->nombre?></td>
        
+      
         <td>
             <div class="hidden-sm hidden-xs btn-group">
                 <!--<button class="btn btn-xs btn-success">
@@ -65,24 +43,9 @@
                     
                </button>-->
 
-                <div class="btn btn-xs btn-info">
-
-                    <? echo Html::linkSoloIcono("ace-icon fa fa-pencil bigger-120", "", false, "investigacion/editar/$obj->id") ?>
-                </div>
-
                 <div class="btn btn-xs btn-danger">
 
-                    <? echo Js::linkAction("eliminar/$obj->id", "", "¿Está seguro de eliminar?", "ace-icon fa fa-trash-o bigger-120") ?>
-                </div>
-                
-                <div class="btn btn-xs btn-group">
-
-                    <? echo Html::linkSoloIcono("ace-icon fa fa-users bigger-120", "", false, "personavinculada/index/$obj->id") ?>
-                </div>
-                
-                 <div class="btn btn-xs btn-purple">
-
-                    <? echo Html::linkSoloIcono("ace-icon fa fa-cogs bigger-120", "", false, "institucionvinculada/index/$obj->id") ?>
+                    <? echo Js::linkAction("eliminar/$idinvestigacion/$obj->id", "", "¿Está seguro de eliminar?", "ace-icon fa fa-trash-o bigger-120") ?>
                 </div>
 
                 <!--<button class="btn btn-xs btn-warning">
@@ -126,4 +89,3 @@
 <? } ?>
 </table>
 
-<? View::partial('paginators/extended', false, array('page' => $arrInvestigacion, 'url' => 'investigacion/index')); ?>
