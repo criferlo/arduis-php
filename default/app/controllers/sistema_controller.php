@@ -11,7 +11,7 @@ class SistemaController extends AppController{
                     Router::redirect("sesion/index");
                 }
                                
-		Flash::info("ARDUIS-PHP Internacionalizacion");
+		Flash::info("Sistema para la gestión de la internacionalización");
 	}
 
 }
