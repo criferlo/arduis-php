@@ -20,8 +20,9 @@ class IdiomaController extends AppController {
         $per = new Idioma();
         //$this->arrPersona = array();
         $consulta=null;
+        $tiponivelingles = Input::post("tiponivelingles_id");
         
-        if(!empty(Input::post("tiponivelingles_id"))){
+        if(!empty($tiponivelingles)){
           
                 if(Input::post("comboBusqueda")=="0"){
                     $consulta="tiponivelingles_id=".Input::post("tiponivelingles_id");
