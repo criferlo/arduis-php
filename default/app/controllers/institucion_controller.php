@@ -12,7 +12,7 @@
  * @author cristhian
  */
 View::template("template_sistema");
-Load::models("tipoinstitucion","tipociudad");
+Load::models("Tipoinstitucion","Tipociudad");
 class InstitucionController extends AppController {
    
      function index($page=1){
