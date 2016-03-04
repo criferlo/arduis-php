@@ -19,8 +19,9 @@ class InvestigacionController extends AppController {
         $per = new Investigacion();
         //$this->arrPersona = array();
         $consulta = null;
+        $busqueda = Input::post("busqueda");
 
-        if (!empty(Input::post("busqueda"))) {
+        if (!empty($busqueda)) {
 
 
             if (Input::post("comboBusqueda") == "0") {
