@@ -21,7 +21,8 @@ class InstitucionController extends AppController {
         //$this->arrPersona = array();
         $consulta=null;
         
-        if(!empty(Input::post("busqueda"))){
+        $busqueda = Input::post("busqueda");
+        if(!empty($busqueda)){
           
                 if(Input::post("comboBusqueda")=="0"){
                     $consulta="nombre like '%".Input::post("busqueda")."%'";

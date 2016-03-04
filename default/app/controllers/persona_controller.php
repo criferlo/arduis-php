@@ -22,8 +22,8 @@ class PersonaController extends AppController {
         $per = new Persona();
         //$this->arrPersona = array();
         $consulta=null;
-        
-        if(!empty(Input::post("busqueda"))){
+        $busqueda = Input::post("busqueda");
+        if(!empty($busqueda)){
           
                 if(Input::post("comboBusqueda")=="0"){
                     $consulta="nombrecompleto like '%".Input::post("busqueda")."%'";
