@@ -13,7 +13,7 @@
  */
 //formularios para docentes de la universidad movilizados hacia 
 
-Load::models("Movilidad", "Persona", "Tipociudad", "Tipopais", "Tipomovilidad", "Archivo", "Tipoinstitucion","Usuario");
+Load::models("Tiposemestre","Movilidad", "Persona", "Tipociudad", "Tipopais", "Tipomovilidad", "Archivo", "Tipoinstitucion","Usuario");
 View::template("template_sistema");
 
 class MovilidadController extends AppController {
