@@ -24,8 +24,9 @@ class MovilidadController extends AppController {
         $per = new Movilidad();
         //$this->arrPersona = array();
         $consulta = null;
+        $tiposemestre = Input::post("tiposemestre_id");
 
-        if (!empty(Input::post("tiposemestre_id"))) {
+        if (!empty($tiposemestre)) {
 
 
             if (Input::post("comboBusqueda") == "0") {
