@@ -14,7 +14,7 @@
 
 
 View::template("template_sistema");
-Load::models("Persona","Archivo","Tipoidentificacion","Tipopersona");
+Load::models("Persona","Archivo","Tipoidentificacion","Tipopersona","Tipoprograma");
 class PersonaController extends AppController {
     //put your code here
     function index($page=1){
