@@ -9,7 +9,7 @@ class IndexController extends AppController
 
     public function index()
     {
-        
+        Router::redirect("sesion/index");
     }
 
 }
