@@ -12,7 +12,7 @@
  * @author cristhian
  */
 View::template("template_sistema");
-Load::models("Eventointernacional","Archivo","Tipoevento","Tiposemestre","Personaevento","Tipoprograma");
+Load::models("Eventointernacional","Archivo","Tipoevento","Tiposemestre","Personaevento","Tipoprograma","Persona");
 class PersonaeventoController extends AppController {
     //put your code here
     function index($idevento){
