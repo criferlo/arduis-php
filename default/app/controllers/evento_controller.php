@@ -20,8 +20,8 @@ class EventoController extends AppController {
         $per = new Eventointernacional();
         //$this->arrPersona = array();
         $consulta=null;
-        
-        if(!empty(Input::post("busqueda"))){
+        $busqueda = Input::post("busqueda");
+        if(!empty($busqueda)){
           
                 if(Input::post("comboBusqueda")=="0"){
                     $consulta="nombreevento like '%".Input::post("busqueda")."%'";
