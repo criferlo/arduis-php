@@ -12,7 +12,7 @@
  * @author cristhian
  */
 //persoans vinculadas a una investigación
-Load::models("Personavinculada","Tipoprograma");
+Load::models("Personavinculada","Tipoprograma","Persona");
 View::template("template_sistema");
 class PersonavinculadaController extends AppController {
     //put your code here
