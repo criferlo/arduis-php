@@ -12,7 +12,7 @@
  * @author cristhian
  */
 View::template("template_sistema");
-Load::models("Eventointernacional","Archivo","Tipoevento","Tiposemestre","Usuario");
+Load::models("Eventointernacional","Archivo","Tipoevento","Tiposemestre","Usuario","Tipoinstitucion");
 class EventoController extends AppController {
     //put your code here
     function index($page=1){
